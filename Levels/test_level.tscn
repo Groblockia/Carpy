@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dikpofaim817t"]
+[gd_scene load_steps=7 format=3 uid="uid://dikpofaim817t"]
 
 [ext_resource type="Texture2D" uid="uid://ch44qq8j0oayb" path="res://icon.svg" id="1_ormqy"]
 [ext_resource type="PackedScene" uid="uid://basjsl5bce6b5" path="res://Player/player.tscn" id="2_00vsl"]
-[ext_resource type="Material" uid="uid://ccq3xhr6xrhlc" path="res://materials/test.tres" id="3_i4ak4"]
+
+[sub_resource type="Environment" id="Environment_4k50d"]
+background_energy_multiplier = 1.67
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00vsl"]
 albedo_texture = ExtResource("1_ormqy")
@@ -10,17 +12,15 @@ uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_gbj0n"]
 material = SubResource("StandardMaterial3D_00vsl")
-size = Vector3(500, 1.04, 500)
+size = Vector3(500, 1, 500)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gbj0n"]
-size = Vector3(100, 1, 100)
-
-[sub_resource type="SphereMesh" id="SphereMesh_00vsl"]
-material = ExtResource("3_i4ak4")
-radius = 1.0
-height = 2.0
+size = Vector3(500, 1, 500)
 
 [node name="Test_level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4k50d")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -31,90 +31,4 @@ mesh = SubResource("BoxMesh_gbj0n")
 shape = SubResource("BoxShape3D_gbj0n")
 
 [node name="Player" parent="." instance=ExtResource("2_00vsl")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 2, 0)
-
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D8" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D9" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D10" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D11" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D12" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D13" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D14" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D15" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -4)
-material = ExtResource("3_i4ak4")
-
-[node name="CSGBox3D16" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 4)
-material = ExtResource("3_i4ak4")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.80604, 3.32943, -6.45441)
-mesh = SubResource("SphereMesh_00vsl")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3112, 3.32943, 2.47912)
-mesh = SubResource("SphereMesh_00vsl")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.287, 3.32943, 0.328695)
-mesh = SubResource("SphereMesh_00vsl")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 10.287, 10.3294, 0.328695)
-spot_range = 14.8189
-spot_attenuation = -0.33
-spot_angle = 58.2519
-spot_angle_attenuation = 0.25
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://basjsl5bce6b5"]
+[gd_scene load_steps=8 format=3 uid="uid://basjsl5bce6b5"]
 
 [ext_resource type="Script" uid="uid://pv0g5q17lcie" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Shader" uid="uid://cpqoi2sd88tl7" path="res://Shaders/outline.gdshader" id="2_btcbx"]
@@ -32,9 +32,6 @@ shader_parameter/lens_distortion_strength = 0.05
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hvfyp"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_btcbx"]
-size = Vector3(0.2, 0.2, 0.2)
-
 [node name="Player" type="Node3D"]
 script = ExtResource("1_l8h54")
 
@@ -66,20 +63,7 @@ one_shot = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.971177)
-mesh = SubResource("BoxMesh_btcbx")
-
-[node name="Raycasts" type="Node3D" parent="."]
-
-[node name="Forward" type="RayCast3D" parent="Raycasts"]
-target_position = Vector3(0, 0, -2.5)
-
-[node name="Backward" type="RayCast3D" parent="Raycasts"]
-target_position = Vector3(0, 0, 2.5)
-
-[node name="Left" type="RayCast3D" parent="Raycasts"]
-target_position = Vector3(-2.5, 0, 0)
-
-[node name="Right" type="RayCast3D" parent="Raycasts"]
-target_position = Vector3(2.5, 0, 0)
+[node name="Ray" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.407266, 0)
+target_position = Vector3(0, 0, 0)
+collide_with_areas = true
