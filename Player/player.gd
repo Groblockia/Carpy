@@ -1,18 +1,21 @@
 extends Node3D
-var is_moving = false
+
 
 const MOVE_DISTANCE = 2
+
 var FORWARD_DIRECTION = -transform.basis.z.normalized()
 var BACKWARD_DIRECTION = transform.basis.z.normalized()
 var LEFT_DIRECTION = -transform.basis.x.normalized()
 var RIGHT_DIRECTION = transform.basis.x.normalized()
-@onready var move_timer = $Move_timer
 
+@onready var move_timer = $Move_timer
+@onready var turn_timer = $Turn_timer
 @onready var ray_forward = $Raycasts/Forward
 @onready var ray_backward = $Raycasts/Backward
 @onready var ray_left = $Raycasts/Left
 @onready var ray_right = $Raycasts/Right
 
+var is_moving = false
 
 func _ready() -> void:
 	print("caca")
@@ -23,17 +26,23 @@ func _process(_delta: float) -> void:
 	BACKWARD_DIRECTION = transform.basis.z.normalized()
 	LEFT_DIRECTION = -transform.basis.x.normalized()
 	RIGHT_DIRECTION = transform.basis.x.normalized()
+	#print(position)
 
 
 func _physics_process(_delta: float) -> void:
+	position = round(position)
 	if Input.is_action_pressed("forward"):
 		move_forward()
+		SignalManager.player_moved.emit()
 	if Input.is_action_pressed("backward"):
 		move_backward()
+		SignalManager.player_moved.emit()
 	if Input.is_action_pressed("left"):
 		move_left()
+		SignalManager.player_moved.emit()
 	if Input.is_action_pressed("right"):
 		move_right()
+		SignalManager.player_moved.emit()
 	if Input.is_action_pressed("turn_left"):
 		turn_left()
 	if Input.is_action_pressed("turn_right"):
@@ -67,7 +76,7 @@ func move_forward():
 		
 		#if path is clear
 		else:
-			SignalManager.movement.emit()
+			
 			is_moving = true
 			
 			var tween = create_tween()
@@ -105,7 +114,7 @@ func move_backward():
 		
 		#if path is clear
 		else:
-			SignalManager.movement.emit()
+			
 			is_moving = true
 			
 			var tween = create_tween()
@@ -143,7 +152,7 @@ func move_left():
 		
 		#if path is clear
 		else:
-			SignalManager.movement.emit()
+			
 			is_moving = true
 			
 			var tween = create_tween()
@@ -181,7 +190,7 @@ func move_right():
 		
 		#if path is clear
 		else:
-			SignalManager.movement.emit()
+			
 			is_moving = true
 			
 			var tween = create_tween()
@@ -195,22 +204,21 @@ func move_right():
 
 func turn_left():
 	if !is_moving:
-		SignalManager.movement.emit()
+		
 		is_moving = true
 		var tween = create_tween()
 		tween.tween_property(self, "rotation:y", rotation.y + PI/2, 0.2)
 		await tween.finished
-		move_timer.start()
-		await move_timer.timeout
+		turn_timer.start()
+		await turn_timer.timeout
 		is_moving = false
 
 func turn_right():
 	if !is_moving:
-		SignalManager.movement.emit()
 		is_moving = true
 		var tween = create_tween()
 		tween.tween_property(self, "rotation:y", rotation.y - PI/2, 0.2)
 		await tween.finished
-		move_timer.start()
-		await move_timer.timeout
+		turn_timer.start()
+		await turn_timer.timeout
 		is_moving = false

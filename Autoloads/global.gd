@@ -1,8 +1,8 @@
 extends Node
 
-func _ready():
-	SignalManager.movement.connect(cacapipi)
 
-func cacapipi():
+func _ready():
+	SignalManager.player_moved.connect(_player_movement)
+
+func _player_movement():
 	pass
-	#print("c'est le mec il suce le cul d'une pute")

@@ -1,3 +1,3 @@
 extends Node
 
-signal movement
+signal player_moved

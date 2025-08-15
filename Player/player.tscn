@@ -9,7 +9,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ntmi"]
 render_priority = 0
 shader = ExtResource("2_btcbx")
-shader_parameter/shadows_enabled = true
+shader_parameter/shadows_enabled = false
 shader_parameter/highlights_enabled = true
 shader_parameter/shadow_strength = 0.4
 shader_parameter/highlight_strength = 0.1
@@ -35,7 +35,7 @@ shader_parameter/lens_distortion_strength = 0.05
 [sub_resource type="BoxMesh" id="BoxMesh_btcbx"]
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="Node3D" groups=["player_group"]]
 script = ExtResource("1_l8h54")
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -64,7 +64,12 @@ mesh = SubResource("CapsuleMesh_hvfyp")
 wait_time = 0.3
 one_shot = true
 
+[node name="Turn_timer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
+visible = false
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.971177)
