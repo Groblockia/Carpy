@@ -14,11 +14,13 @@ var RIGHT_DIRECTION = transform.basis.x.normalized()
 @onready var ray_backward = $Raycasts/Backward
 @onready var ray_left = $Raycasts/Left
 @onready var ray_right = $Raycasts/Right
+@onready var camera = $Camera3D
 
 var is_moving = false
 
 func _ready() -> void:
-	print("caca")
+	SignalManager.player_dies.connect(_pause_player)
+	SignalManager.level_entered.connect(_start_player)
 
 
 func _process(_delta: float) -> void:
@@ -33,16 +35,12 @@ func _physics_process(_delta: float) -> void:
 	position = round(position)
 	if Input.is_action_pressed("forward"):
 		move_forward()
-		SignalManager.player_moved.emit()
 	if Input.is_action_pressed("backward"):
 		move_backward()
-		SignalManager.player_moved.emit()
 	if Input.is_action_pressed("left"):
 		move_left()
-		SignalManager.player_moved.emit()
 	if Input.is_action_pressed("right"):
 		move_right()
-		SignalManager.player_moved.emit()
 	if Input.is_action_pressed("turn_left"):
 		turn_left()
 	if Input.is_action_pressed("turn_right"):
@@ -54,7 +52,7 @@ func move_forward():
 		
 		#if path is blocked
 		if ray_forward.is_colliding():
-			print("path blocked")
+			#print("path blocked")
 			is_moving = true
 			
 			var col_point = ray_forward.get_collision_point()
@@ -92,7 +90,7 @@ func move_backward():
 		
 		#if path is blocked
 		if ray_backward.is_colliding():
-			print("path blocked")
+			#print("path blocked")
 			is_moving = true
 			
 			var col_point = ray_backward.get_collision_point()
@@ -130,7 +128,7 @@ func move_left():
 		
 		#if path is blocked
 		if ray_left.is_colliding():
-			print("path blocked")
+			#print("path blocked")
 			is_moving = true
 			
 			var col_point = ray_left.get_collision_point()
@@ -168,7 +166,7 @@ func move_right():
 		
 		#if path is blocked
 		if ray_right.is_colliding():
-			print("path blocked")
+			#print("path blocked")
 			is_moving = true
 			
 			var col_point = ray_right.get_collision_point()
@@ -222,3 +220,13 @@ func turn_right():
 		turn_timer.start()
 		await turn_timer.timeout
 		is_moving = false
+
+func _pause_player():
+	print("player paused")
+	set_process(false)
+	set_physics_process(false)
+
+func _start_player():
+	print("player started")
+	set_process(true)
+	set_physics_process(true)

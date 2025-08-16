@@ -1,3 +1,5 @@
 extends Node
 
-signal player_moved
+
+signal level_entered
+signal player_dies

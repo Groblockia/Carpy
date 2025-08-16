@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://2p3r08v0yycb"]
+
+[ext_resource type="Script" uid="uid://tctr6gbrlxve" path="res://Menus/main_menu.gd" id="1_jf8mj"]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jf8mj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Start_btn" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start
+"
+
+[node name="Exit_btn" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit
+"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Start_btn" to="." method="_on_start_btn_pressed"]
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/VBoxContainer/Exit_btn" to="." method="_on_exit_btn_button_down"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/Exit_btn" to="." method="_on_exit_btn_pressed"]

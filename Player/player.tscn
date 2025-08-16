@@ -1,20 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://basjsl5bce6b5"]
+[gd_scene load_steps=6 format=3 uid="uid://basjsl5bce6b5"]
 
 [ext_resource type="Script" uid="uid://pv0g5q17lcie" path="res://Player/player.gd" id="1_l8h54"]
-[ext_resource type="Shader" uid="uid://cpqoi2sd88tl7" path="res://Shaders/outline.gdshader" id="2_btcbx"]
 [ext_resource type="Shader" uid="uid://day4xc4slba0i" path="res://Shaders/pixellize.gdshader" id="3_btcbx"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_btcbx"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ntmi"]
-render_priority = 0
-shader = ExtResource("2_btcbx")
-shader_parameter/shadows_enabled = false
-shader_parameter/highlights_enabled = true
-shader_parameter/shadow_strength = 0.4
-shader_parameter/highlight_strength = 0.1
-shader_parameter/highlight_color = Color(1, 1, 1, 1)
-shader_parameter/shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gwnis"]
 shader = ExtResource("3_btcbx")
@@ -32,22 +19,15 @@ shader_parameter/lens_distortion_strength = 0.05
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hvfyp"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_btcbx"]
-size = Vector3(0.2, 0.2, 0.2)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 
 [node name="Player" type="Node3D" groups=["player_group"]]
 script = ExtResource("1_l8h54")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 size = 3.36
 near = 0.001
-
-[node name="shader" type="MeshInstance3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.0660552)
-extra_cull_margin = 16384.0
-mesh = SubResource("PlaneMesh_btcbx")
-surface_material_override/0 = SubResource("ShaderMaterial_4ntmi")
 
 [node name="pixellize_shader" type="ColorRect" parent="Camera3D"]
 material = SubResource("ShaderMaterial_gwnis")
@@ -58,6 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_hvfyp")
 
 [node name="Move_timer" type="Timer" parent="."]
@@ -67,13 +48,6 @@ one_shot = true
 [node name="Turn_timer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-visible = false
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.971177)
-mesh = SubResource("BoxMesh_btcbx")
 
 [node name="Raycasts" type="Node3D" parent="."]
 
@@ -88,3 +62,10 @@ target_position = Vector3(-2.5, 0, 0)
 
 [node name="Right" type="RayCast3D" parent="Raycasts"]
 target_position = Vector3(2.5, 0, 0)
+
+[node name="player_hitbox" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player_hitbox"]
+shape = SubResource("CapsuleShape3D_4ntmi")

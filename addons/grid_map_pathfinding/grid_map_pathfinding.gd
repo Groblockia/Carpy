@@ -88,7 +88,7 @@ func setup_astar_grid(grid_walkable_items: Array[int]):
 func find_path(start: Vector3i, end: Vector3i) -> Array:
 	# Ensure start and end are within the grid and walkable
 	if not point_id_map.has(start) or not point_id_map.has(end):
-		print("ptnzbi")
+		#print("ptnzbi")
 		return [] # No valid path
 	
 	var start_id: int = point_id_map[start]

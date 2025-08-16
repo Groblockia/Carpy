@@ -10,8 +10,9 @@ config_version=5
 
 [application]
 
-config/name="Carpy"
-run/main_scene="uid://dikpofaim817t"
+config/name="AsterionMaze"
+config/description="Escape from the maze without getting caught"
+run/main_scene="uid://2p3r08v0yycb"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,6 +20,11 @@ config/icon="res://icon.svg"
 
 Global="*res://Autoloads/global.gd"
 SignalManager="*res://Autoloads/signal_manager.gd"
+
+[display]
+
+window/size/viewport_width=648
+window/stretch/mode="viewport"
 
 [editor_plugins]
 
@@ -73,3 +79,7 @@ espace={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Ennemies"
 3d_physics/layer_4="Items"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
